@@ -9,7 +9,7 @@ import {
   addNote,
   getPipelineId,
 } from '../../lib/pipedrive.js';
-import { sendSlackNotification, formatLeadAlert } from '../../lib/slack.js';
+import { sendChatNotification, formatLeadAlert } from '../../lib/gchat.js';
 import { LOB_LABELS } from '../../lib/types.js';
 import type { EmailPayload } from '../../lib/types.js';
 
@@ -92,8 +92,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    // Slack notification
-    await sendSlackNotification(
+    // Google Chat notification
+    await sendChatNotification(
       formatLeadAlert({
         source: 'Email',
         name,

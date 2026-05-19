@@ -8,7 +8,7 @@ AI-native CRM middleware for Blackdeer Investment Group. Routes leads from RB2B,
 RB2B (web visitors) ──→ POST /webhooks/rb2b ──┐
 Allo (phone calls)  ──→ POST /webhooks/allo ──┤──→ Claude (classify + score + draft)
 Email (forwarded)   ──→ POST /webhooks/email ──┤──→ Pipedrive (person + deal + notes)
-Manual re-enrich    ──→ POST /enrich/:dealId ──┘──→ Slack (#bd-leads-all / #bd-leads-hot)
+Manual re-enrich    ──→ POST /enrich/:dealId ──┘──→ Google Chat (bd-leads-all / bd-leads-hot)
 ```
 
 ## What it does
@@ -18,7 +18,7 @@ Manual re-enrich    ──→ POST /enrich/:dealId ──┘──→ Slack (#bd
 3. **Creates** a Pipedrive Person + Deal in the correct pipeline
 4. **Enriches** contact info (company, role, industry) via Claude
 5. **Drafts** a first-touch email for human review
-6. **Notifies** Slack with a formatted alert (hot leads go to #bd-leads-hot)
+6. **Notifies** Google Chat with a formatted alert (hot leads go to bd-leads-hot space)
 
 ## Setup
 
@@ -32,7 +32,8 @@ Copy `.env.example` to `.env` and fill in:
 | `PIPEDRIVE_API_TOKEN` | Yes | Pipedrive API token from Settings → Personal preferences → API |
 | `PIPEDRIVE_PIPELINE_*` | Yes | Pipeline IDs for each LOB (see below) |
 | `WEBHOOK_SECRET` | No | Shared secret for webhook authentication (recommended) |
-| `SLACK_WEBHOOK_URL` | No | Slack incoming webhook URL for notifications |
+| `GCHAT_WEBHOOK_URL` | No | Google Chat incoming webhook URL for lead notifications |
+| `GCHAT_WEBHOOK_URL_HOT` | No | Separate Google Chat webhook for hot leads (optional) |
 
 ### 2. Get Pipedrive pipeline IDs
 
