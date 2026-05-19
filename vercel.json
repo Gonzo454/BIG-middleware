@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/webhooks/rb2b", "destination": "/api/webhooks/rb2b" },
+    { "source": "/webhooks/allo", "destination": "/api/webhooks/allo" },
+    { "source": "/webhooks/email", "destination": "/api/webhooks/email" },
+    { "source": "/enrich/:dealId", "destination": "/api/enrich/[dealId]" }
+  ]
+}
