@@ -50,11 +50,15 @@ export function getPipelineId(lob: LOB): number | undefined {
 
 // ── Person CRUD ───────────────────────────────────────────────────
 
+interface SearchResult {
+  items: Array<{ result_score: number; item: PipedrivePerson }>;
+}
+
 export async function findPersonByEmail(email: string): Promise<PipedrivePerson | null> {
-  const results = await request<PipedrivePerson[]>(
+  const results = await request<SearchResult>(
     `/persons/search?term=${encodeURIComponent(email)}&fields=email&limit=1`
   );
-  return results?.[0] ?? null;
+  return results?.items?.[0]?.item ?? null;
 }
 
 export async function createPerson(person: {

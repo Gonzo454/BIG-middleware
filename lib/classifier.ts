@@ -59,13 +59,23 @@ export async function classifyLead(
     };
   }
 
-  const parsed = JSON.parse(jsonMatch[0]);
-  return {
-    lob: parsed.lob as LOB,
-    confidence: parsed.confidence ?? 0.5,
-    reasoning: parsed.reasoning ?? '',
-    lead_score: parsed.lead_score ?? 5,
-    is_hot: parsed.is_hot ?? false,
-    suggested_subject: parsed.suggested_subject,
-  };
+  try {
+    const parsed = JSON.parse(jsonMatch[0]);
+    return {
+      lob: parsed.lob as LOB,
+      confidence: parsed.confidence ?? 0.5,
+      reasoning: parsed.reasoning ?? '',
+      lead_score: parsed.lead_score ?? 5,
+      is_hot: parsed.is_hot ?? false,
+      suggested_subject: parsed.suggested_subject,
+    };
+  } catch {
+    return {
+      lob: 'commercial-pm',
+      confidence: 0.3,
+      reasoning: 'Could not parse classification — defaulting to Commercial PM',
+      lead_score: 3,
+      is_hot: false,
+    };
+  }
 }
