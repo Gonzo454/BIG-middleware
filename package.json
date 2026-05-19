@@ -1,0 +1,22 @@
+{
+  "name": "blackdeer-middleware",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-native CRM middleware for Blackdeer Investment Group — routes RB2B, Allo, and email leads into Pipedrive via Claude",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "vercel": "^41.0.0",
+    "vitest": "^3.0.0"
+  }
+}
